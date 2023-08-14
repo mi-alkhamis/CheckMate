@@ -30,6 +30,15 @@ components:
           type: "string"
         last_name:
           type: "string"
+  parameters:
+   username:
+      name: "username"
+      description: "username info to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
 #----------------------------------------- Paths -----------------------------------------
 paths:
   /user:
@@ -41,3 +50,22 @@ paths:
       responses:
         "200":
           description: "Successfully read people list"
+    post:
+      operationId: "user.create"
+      tags:
+        - user
+      summary: "Create a user"
+      requestBody:
+          description: "User to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "user"     # parametre of handler function to send body to 
+                $ref: "#/components/schemas/user"
+      responses:
+        "201":
+          description: "Successfully created person"
+        "406":
+          description: " Person Already Existed in DB."
+ 
