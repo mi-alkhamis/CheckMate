@@ -82,35 +82,35 @@ paths:
           description: "Successfully read a user info"
         "404":
           description: "The username not exited"
-  #   put:
-  #     operationId: user.update_one
-  #     tags: 
-  #       - user
-  #     summary: "Update a Person info"
-  #     parameters:
-  #       - $ref: "#/components/parameters/lname"
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             x-body-name: "person"
-  #             $ref: "#/components/schemas/person"
-  #     responses:
-  #       "200":
-  #         description: "The user info updated successfully."
-  #       "404":
-  #         description: "The person not exited"
-  #   delete:
-  #     operationId: user.delete_one
-  #     summary: "Delete a person from DB"
-  #     tags:
-  #       - user
-  #     parameters:
-  #       - $ref: "#/components/parameters/lname"
-  #     responses:
-  #       "200":
-  #         description: "Successfully deleted user."
-  #       "404":
-  #         description: "The person not exited"
+    put:
+      operationId: user.update_one
+      tags: 
+        - user
+      summary: "Update a Person info"
+      parameters:
+        - $ref: "#/components/parameters/username"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/user"
+      responses:
+        "2001":
+          description: "The user info updated successfully."
+        "404":
+          description: "The Username does not exist."
+    delete:
+      operationId: user.delete_one
+      summary: "Delete a person from DB"
+      tags:
+        - user
+      parameters:
+        - $ref: "#/components/parameters/username"
+      responses:
+        "200":
+          description: "Successfully deleted user."
+        "404":
+          description: "The User not existed"
         
       

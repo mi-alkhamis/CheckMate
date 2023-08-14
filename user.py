@@ -9,6 +9,7 @@ def read_all():
 
 
 def create(user):
+   print(user)
    username = user.get('username')
    existing_user = User.query.filter(User.username == username).one_or_none()
 
@@ -33,3 +34,31 @@ def read_one(username):
         )
 
 
+def update_one(username, user):
+
+    existing_user = User.query.filter(User.username == username).one_or_none()
+    if existing_user:
+        update_user = user_schema.load(user, session=db.session)
+        existing_user.first_name = update_user.first_name
+        existing_user.last_name = update_user.last_name
+        existing_user.email = update_user.email
+        db.session.merge(existing_user)
+        db.session.commit()
+        return user_schema.dump(existing_user), 201
+    else:
+        abort(
+            404, f"The {username} does not exist."
+        )
+
+
+def delete_one(username):
+    existing_user = User.query.filter(User.username == username).one_or_none()
+
+    if existing_user:
+        db.session.delete(existing_user)
+        db.session.commit()
+        return make_response(f"The Username {username} successfully deleted", 200)
+    else:
+        abort(
+            404, f"The {username} does not exist."
+        )
