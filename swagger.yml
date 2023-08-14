@@ -1,0 +1,43 @@
+openapi: 3.0.3
+#----------------------------------------- Components -----------------------------------------
+info:
+  title: "Flask API"
+  description: "An api about people and thier notes"
+  contact: 
+    name: "Milad Alkahamis"
+    email: "mi-alkhamis@hotmail.com"
+  license:
+    name: GPLv3
+    url: "https://www.gnu.org/licenses/gpl-3.0.en.html"
+  version: "0.1"
+servers:
+  - url: "/api"
+
+#----------------------------------------- Components -----------------------------------------
+components:
+  schemas:
+    user:
+      type: "object"
+      required:
+        - username
+        - email
+      properties:
+        username:
+          type: "string"
+        email:
+          type: "string"
+        first_name:
+          type: "string"
+        last_name:
+          type: "string"
+#----------------------------------------- Paths -----------------------------------------
+paths:
+  /user:
+    get:
+      operationId: "user.read_all"
+      tags: 
+        - user
+      summary: "Read the list of people"
+      responses:
+        "200":
+          description: "Successfully read people list"
