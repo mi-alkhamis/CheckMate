@@ -2,7 +2,7 @@ openapi: 3.0.3
 #----------------------------------------- Components -----------------------------------------
 info:
   title: "Flask API"
-  description: "An api about people and thier notes"
+  description: "An api about user and thier notes"
   contact: 
     name: "Milad Alkahamis"
     email: "mi-alkhamis@hotmail.com"
@@ -46,10 +46,10 @@ paths:
       operationId: "user.read_all"
       tags: 
         - user
-      summary: "Read the list of people"
+      summary: "Read the list of user"
       responses:
         "200":
-          description: "Successfully read people list"
+          description: "Successfully read user list"
     post:
       operationId: "user.create"
       tags:
@@ -68,4 +68,49 @@ paths:
           description: "Successfully created person"
         "406":
           description: " Person Already Existed in DB."
- 
+          
+  /user/{username}:
+    get:
+      operationId: user.read_one
+      tags:
+        - user
+      summary: "read info of a person"
+      parameters:
+        - $ref: "#/components/parameters/username"
+      responses:
+        "200":
+          description: "Successfully read a user info"
+        "404":
+          description: "The username not exited"
+  #   put:
+  #     operationId: user.update_one
+  #     tags: 
+  #       - user
+  #     summary: "Update a Person info"
+  #     parameters:
+  #       - $ref: "#/components/parameters/lname"
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             x-body-name: "person"
+  #             $ref: "#/components/schemas/person"
+  #     responses:
+  #       "200":
+  #         description: "The user info updated successfully."
+  #       "404":
+  #         description: "The person not exited"
+  #   delete:
+  #     operationId: user.delete_one
+  #     summary: "Delete a person from DB"
+  #     tags:
+  #       - user
+  #     parameters:
+  #       - $ref: "#/components/parameters/lname"
+  #     responses:
+  #       "200":
+  #         description: "Successfully deleted user."
+  #       "404":
+  #         description: "The person not exited"
+        
+      

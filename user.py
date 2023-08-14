@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, make_response
 from config import db
 from models import user_schema, users_schema, User
 
@@ -21,4 +21,15 @@ def create(user):
         abort(
             406, f"Username {username}  already exist."
         )
+
+
+def read_one(username):
+    user = User.query.filter(User.username == username).one_or_none()
+    if user is not None:
+        return user_schema.dump(user)
+    else:
+        abort(
+            404, f"The {username} does not exist."
+        )
+
 
