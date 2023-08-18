@@ -6,10 +6,10 @@ from util import uuidgen
 class User(db.Model):
     __tablename__ = "User"
     id = db.Column(db.String(64), primary_key=True, default=uuidgen)
-    username = db.Column(db.String(32))
-    email = db.Column(db.String(32), index=True)
-    first_name = db.Column(db.String(32))
-    last_name = db.Column(db.String(32))
+    username = db.Column(db.String(32), unique=True, index=True)
+    email = db.Column(db.String(32), unique=True, index=True)
+    first_name = db.Column(db.String(32), nullable=False)
+    last_name = db.Column(db.String(32), nullable=False)
     timestamp = db.Column(
         db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
