@@ -30,6 +30,17 @@ components:
           type: "string"
         last_name:
           type: "string"
+    update_user:
+      type: "object"
+      required:
+        - email
+      properties:
+        email:
+          type: "string"
+        first_name:
+          type: "string"
+        last_name:
+          type: "string"
   parameters:
    username:
       name: "username"
@@ -94,9 +105,9 @@ paths:
           application/json:
             schema:
               x-body-name: "user"
-              $ref: "#/components/schemas/user"
+              $ref: "#/components/schemas/update_user"
       responses:
-        "2001":
+        "201":
           description: "The user info updated successfully."
         "404":
           description: "The Username does not exist."
